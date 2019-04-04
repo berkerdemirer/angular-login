@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginRegisterRoutingModule} from './login-register-routing.module';
+import {CustomMaterialModule} from '../angular-material/custom-material.module';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import {LoginRegisterRoutingModule} from './login-register-routing.module';
   ],
   imports: [
     LoginRegisterRoutingModule,
+    CustomMaterialModule
   ],
   exports: [
     LoginComponent,
