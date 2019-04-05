@@ -11,20 +11,26 @@ import {FormControl, Validators} from '@angular/forms';
 
 export class LoginComponent implements OnInit, AfterViewInit {
 
+  // Validators for email and password input fields
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.required]);
 
-  myStyle: object = {};
-  myParams: object = {};
+  // Particle JS attributes
+  particleJsCustomStyle: object = {};
+  particleJsCustomParams: object = {};
   width = 100;
   height = 100;
+  // ---------------------
+
+  // Password input field visibility variable
   hide = true;
+
   constructor(private elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
 
-    this.myStyle = {
+    this.particleJsCustomStyle = {
       position: 'fixed',
       width: '100%',
       height: '100%',
@@ -35,7 +41,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       bottom: 0,
     };
 
-    this.myParams = {
+    this.particleJsCustomParams = {
       particles: {
         number: {
           value: 75,
@@ -52,6 +58,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // Change login module's background
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'cornflowerblue';
   }
 
@@ -61,6 +68,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         '';
   }
 
+  // Provide error message if there is an error
   getPasswordValidationErrorMessage() {
     return this.email.hasError('required') ? 'You must enter a value' :
       '';
