@@ -25,5 +25,10 @@
     <button [disabled]="password.invalid || email.invalid" mat-raised-button color="accent" class="login-button">Login</button>
   </mat-grid-tile>
 
+  <mat-grid-tile>
+    <p style="color: white; font-family: Verdana,serif">Don't you have an account? </p> &nbsp;
+    <b><a routerLink="/auth/register" style="text-decoration: none; color: #ff4081; font-family: Verdana,serif">Register now</a></b>
+  </mat-grid-tile>
+
 </mat-grid-list>
 
