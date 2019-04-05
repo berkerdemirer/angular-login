@@ -1,1 +1,10 @@
-login component works
+<mat-form-field appearance="outline">
+  <input matInput placeholder="e-mail*" [formControl]="email" required>
+  <mat-error *ngIf="email.invalid">{{getEmailValidationErrorMessage()}}</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+  <input matInput placeholder="password*" [formControl]="password" [type]="hide ? 'password' : 'text'" required>
+  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  <mat-error *ngIf="password.invalid">{{getPasswordValidationErrorMessage()}}</mat-error>
+</mat-form-field>

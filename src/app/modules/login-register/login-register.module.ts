@@ -3,6 +3,8 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginRegisterRoutingModule} from './login-register-routing.module';
 import {CustomMaterialModule} from '../angular-material/custom-material.module';
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,7 +13,9 @@ import {CustomMaterialModule} from '../angular-material/custom-material.module';
   ],
   imports: [
     LoginRegisterRoutingModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports: [
     LoginComponent,
