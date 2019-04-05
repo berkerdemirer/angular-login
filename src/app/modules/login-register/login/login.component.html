@@ -1,10 +1,29 @@
-<mat-form-field appearance="outline">
-  <input matInput placeholder="e-mail*" [formControl]="email" required>
-  <mat-error *ngIf="email.invalid">{{getEmailValidationErrorMessage()}}</mat-error>
-</mat-form-field>
+<particles [params]="myParams" [style]="myStyle" [width]="width" [height]="height"></particles>
 
-<mat-form-field appearance="outline">
-  <input matInput placeholder="password*" [formControl]="password" [type]="hide ? 'password' : 'text'" required>
-  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-  <mat-error *ngIf="password.invalid">{{getPasswordValidationErrorMessage()}}</mat-error>
-</mat-form-field>
+<mat-grid-list cols="1" rowHeight="100px" style="margin-top: 20vh">
+
+  <mat-grid-tile>
+    <img src="./assets/login-register/fob_logo.png">
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-form-field appearance="outline" class="email-form-item">
+      <input matInput placeholder="e-mail*" [formControl]="email" required width="300px">
+      <mat-error *ngIf="email.invalid">{{getEmailValidationErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-form-field appearance="outline" class="password-form-item" >
+      <input matInput placeholder="password*" [formControl]="password" [type]="hide ? 'password' : 'text'" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error *ngIf="password.invalid">{{getPasswordValidationErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <button [disabled]="password.invalid || email.invalid" mat-raised-button color="accent" class="login-button">Login</button>
+  </mat-grid-tile>
+
+</mat-grid-list>
+

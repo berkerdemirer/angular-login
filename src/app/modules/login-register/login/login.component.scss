@@ -1,0 +1,22 @@
+$formItemWidth : 450px;
+
+.email-form-item {
+  width: $formItemWidth;
+}
+
+.password-form-item {
+  width: $formItemWidth;
+}
+
+.login-button {
+  width: $formItemWidth;
+  height: 50px;
+}
+
+.mat-form-field-outline {
+  background-color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
