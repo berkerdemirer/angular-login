@@ -7,26 +7,39 @@
     <img src="./assets/login-register/fob_logo.png">
   </mat-grid-tile>
 
-  <mat-grid-tile>
-    <mat-form-field appearance="outline" class="email-form-item">
-      <input matInput placeholder="e-mail*" [formControl]="emailFormControl" required width="300px">
-      <mat-error *ngIf="emailFormControl.invalid">{{getEmailValidationErrorMessage()}}</mat-error>
-    </mat-form-field>
-  </mat-grid-tile>
+  <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+    <mat-grid-tile>
+      <mat-form-field appearance="outline" class="email-form-item">
+        <input matInput placeholder="e-mail*" [formControl]="this.loginForm.get('emailFormControl')" required
+               width="300px">
+        <mat-error
+          *ngIf="this.loginForm.get('emailFormControl').invalid">{{getEmailValidationErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field appearance="outline" class="password-form-item">
+        <input matInput placeholder="password*" [formControl]="this.loginForm.get('passwordFormControl')"
+               [type]="hide ? 'password' : 'text'"
+               required>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error
+          *ngIf="this.loginForm.get('passwordFormControl').invalid">{{getPasswordValidationErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <button
+        [disabled]="this.loginForm.get('passwordFormControl').invalid || this.loginForm.get('emailFormControl').invalid"
+        mat-raised-button color="accent"
+        type="submit"
+        class="login-button">Login
+      </button>
+    </mat-grid-tile>
+  </form>
 
   <mat-grid-tile>
-    <mat-form-field appearance="outline" class="password-form-item">
-      <input matInput placeholder="password*" [formControl]="passwordFormControl" [type]="hide ? 'password' : 'text'"
-             required>
-      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      <mat-error *ngIf="passwordFormControl.invalid">{{getPasswordValidationErrorMessage()}}</mat-error>
-    </mat-form-field>
-  </mat-grid-tile>
-
-  <mat-grid-tile>
-    <button [disabled]="passwordFormControl.invalid || emailFormControl.invalid" mat-raised-button color="accent"
-            class="login-button">Login
-    </button>
+    <p style="color: #f5f2ff; font-family: Verdana,serif"> <b>{{errorMsg}}</b></p> &nbsp;
   </mat-grid-tile>
 
   <mat-grid-tile>
@@ -34,6 +47,7 @@
     <b><a routerLink="/auth/register" style="text-decoration: none; color: #ff4081; font-family: Verdana,serif">Register
       now</a></b>
   </mat-grid-tile>
+
 
 </mat-grid-list>
 

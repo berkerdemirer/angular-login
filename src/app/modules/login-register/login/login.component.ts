@@ -1,5 +1,8 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthenticationService} from '../../../_services/authentication/authentication.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +14,15 @@ import {FormControl, Validators} from '@angular/forms';
 
 export class LoginComponent implements OnInit, AfterViewInit {
 
+  returnUrl: string;
+  errorMsg: string;
+
   // Validators for email and password input fields
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  passwordFormControl = new FormControl('', [Validators.required, Validators.required]);
+  loginForm = new FormGroup({
+    emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+    passwordFormControl: new FormControl('', [Validators.required, Validators.required])
+  });
+
 
   // Particle JS attributes
   particleJsCustomStyle: object = {};
@@ -25,10 +34,22 @@ export class LoginComponent implements OnInit, AfterViewInit {
   // Password input field visibility variable
   hide = true;
 
-  constructor(private elementRef: ElementRef) {
+  constructor(
+    private elementRef: ElementRef,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+  ) {
+
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit(): void {
+
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
 
     this.particleJsCustomStyle = {
       position: 'fixed',
@@ -63,15 +84,29 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   getEmailValidationErrorMessage() {
-    return this.emailFormControl.hasError('required') ? 'You must enter a value' :
-      this.emailFormControl.hasError('email') ? 'Not a valid email' :
+    return this.loginForm.get('emailFormControl').hasError('required') ? 'You must enter a value' :
+      this.loginForm.get('emailFormControl').hasError('email') ? 'Not a valid email' :
         '';
   }
 
   // Provide error message if there is an error
   getPasswordValidationErrorMessage() {
-    return this.passwordFormControl.hasError('required') ? 'You must enter a value' :
+    return this.loginForm.get('passwordFormControl').hasError('required') ? 'You must enter a value' :
       '';
+  }
+
+  submitLoginForm() {
+
+    this.authenticationService.login(this.loginForm.get('emailFormControl').value, this.loginForm.get('passwordFormControl').value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          console.log(error);
+          this.errorMsg = error.error.message;
+        });
   }
 
 
