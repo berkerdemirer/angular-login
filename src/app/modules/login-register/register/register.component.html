@@ -1,1 +1,55 @@
-register module works
+<mat-grid-list cols="1" rowHeight="100px" style="margin-top: 20vh">
+
+  <mat-grid-tile>
+    <img src="./assets/login-register/fob_logo.png">
+  </mat-grid-tile>
+
+  <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
+    <mat-grid-tile>
+      <mat-form-field appearance="outline" class="email-form-item">
+        <input matInput placeholder="E-mail*" [formControl]="registerForm.get('emailFormControl')" required
+               width="300px">
+        <mat-error *ngIf="registerForm.get('emailFormControl').invalid">{{getEmailValidationErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field appearance="outline" class="password-form-item">
+        <input matInput placeholder="Password*" [formControl]="registerForm.get('passwordFormControl')"
+               [type]="hide ? 'password' : 'text'"
+               required>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error
+          *ngIf="registerForm.get('passwordFormControl').invalid">{{getPasswordValidationErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field appearance="outline" class="password-form-item">
+        <input matInput placeholder="Re-type Password*" [formControl]="registerForm.get('retypedPasswordFormControl')"
+               [type]="hide ? 'password' : 'text'" required>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error
+          *ngIf="registerForm.get('passwordFormControl').value !== registerForm.get('retypedPasswordFormControl').value">{{"Password does not match"}}</mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <button
+        [disabled]="registerForm.get('passwordFormControl').invalid || registerForm.get('emailFormControl').invalid ||registerForm.get('passwordFormControl').value !== registerForm.get('retypedPasswordFormControl').value"
+        mat-raised-button color="accent"
+        type = "submit"
+        class="register-button">Register
+      </button>
+    </mat-grid-tile>
+
+  </form>
+
+  <mat-grid-tile>
+    <p style="color: white; font-family: Verdana,serif">Already have an account? </p> &nbsp;
+    <b><a routerLink="/auth/login" style="text-decoration: none; color: #ff4081; font-family: Verdana,serif">Login
+      now</a></b>
+  </mat-grid-tile>
+
+</mat-grid-list>
+

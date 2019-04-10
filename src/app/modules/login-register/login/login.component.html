@@ -1,4 +1,5 @@
-<particles [params]="particleJsCustomParams" [style]="particleJsCustomStyle" [width]="width" [height]="height"></particles>
+<particles [params]="particleJsCustomParams" [style]="particleJsCustomStyle" [width]="width"
+           [height]="height"></particles>
 
 <mat-grid-list cols="1" rowHeight="100px" style="margin-top: 20vh">
 
@@ -8,26 +9,30 @@
 
   <mat-grid-tile>
     <mat-form-field appearance="outline" class="email-form-item">
-      <input matInput placeholder="e-mail*" [formControl]="email" required width="300px">
-      <mat-error *ngIf="email.invalid">{{getEmailValidationErrorMessage()}}</mat-error>
+      <input matInput placeholder="e-mail*" [formControl]="emailFormControl" required width="300px">
+      <mat-error *ngIf="emailFormControl.invalid">{{getEmailValidationErrorMessage()}}</mat-error>
     </mat-form-field>
   </mat-grid-tile>
 
   <mat-grid-tile>
-    <mat-form-field appearance="outline" class="password-form-item" >
-      <input matInput placeholder="password*" [formControl]="password" [type]="hide ? 'password' : 'text'" required>
+    <mat-form-field appearance="outline" class="password-form-item">
+      <input matInput placeholder="password*" [formControl]="passwordFormControl" [type]="hide ? 'password' : 'text'"
+             required>
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      <mat-error *ngIf="password.invalid">{{getPasswordValidationErrorMessage()}}</mat-error>
+      <mat-error *ngIf="passwordFormControl.invalid">{{getPasswordValidationErrorMessage()}}</mat-error>
     </mat-form-field>
   </mat-grid-tile>
 
   <mat-grid-tile>
-    <button [disabled]="password.invalid || email.invalid" mat-raised-button color="accent" class="login-button">Login</button>
+    <button [disabled]="passwordFormControl.invalid || emailFormControl.invalid" mat-raised-button color="accent"
+            class="login-button">Login
+    </button>
   </mat-grid-tile>
 
   <mat-grid-tile>
-    <p style="color: white; font-family: Verdana,serif">Don't you have an account? </p> &nbsp;
-    <b><a routerLink="/auth/register" style="text-decoration: none; color: #ff4081; font-family: Verdana,serif">Register now</a></b>
+    <p style="color: white; font-family: Verdana,serif">Already have an account? </p> &nbsp;
+    <b><a routerLink="/auth/register" style="text-decoration: none; color: #ff4081; font-family: Verdana,serif">Register
+      now</a></b>
   </mat-grid-tile>
 
 </mat-grid-list>

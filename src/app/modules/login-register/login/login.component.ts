@@ -12,8 +12,8 @@ import {FormControl, Validators} from '@angular/forms';
 export class LoginComponent implements OnInit, AfterViewInit {
 
   // Validators for email and password input fields
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.required]);
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  passwordFormControl = new FormControl('', [Validators.required, Validators.required]);
 
   // Particle JS attributes
   particleJsCustomStyle: object = {};
@@ -63,14 +63,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   getEmailValidationErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
-      this.email.hasError('email') ? 'Not a valid email' :
+    return this.emailFormControl.hasError('required') ? 'You must enter a value' :
+      this.emailFormControl.hasError('email') ? 'Not a valid email' :
         '';
   }
 
   // Provide error message if there is an error
   getPasswordValidationErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
+    return this.passwordFormControl.hasError('required') ? 'You must enter a value' :
       '';
   }
 
