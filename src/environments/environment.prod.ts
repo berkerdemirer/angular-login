@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://agile-peak-56363.herokuapp.com'
+
 };
