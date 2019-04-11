@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    
+
     this.particleJsCustomStyle = {
       position: 'fixed',
       width: '100%',
@@ -94,12 +94,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   submitLoginForm() {
 
+    this.errorMsg = '';
+
     this.authenticationService.login(this.loginForm.get('emailFormControl').value, this.loginForm.get('passwordFormControl').value)
       .pipe(first())
       .subscribe(
         data => {
           console.log(data);
-          this.router.navigate(['/details']);
+          this.router.navigateByUrl('/details');
         },
         error => {
           console.log(error);

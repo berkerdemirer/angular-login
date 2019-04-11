@@ -4,6 +4,7 @@ import {AuthenticationService} from '../../../_services/authentication/authentic
 import {Router} from '@angular/router';
 import {UserService} from '../../../_services/user/user.service';
 import {first} from 'rxjs/operators';
+import {User} from '../../../_models/user/user.model';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,7 @@ import {first} from 'rxjs/operators';
 export class RegisterComponent implements OnInit, AfterViewInit {
 
   errorMsg: string;
+  user = new User();
 
   // Validators for email and password input fields
   registerForm = new FormGroup({
@@ -62,11 +64,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
   submitRegisterForm() {
-    this.userService.register(this.registerForm.value)
+
+    this.errorMsg = '';
+    this.user.email = this.registerForm.get('emailFormControl').value;
+    this.user.password = this.registerForm.get('passwordFormControl').value;
+
+    this.userService.register(this.user)
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['']);
         },
         error => {
           this.errorMsg = error.error.message;
