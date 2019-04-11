@@ -1,5 +1,9 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthenticationService} from '../../../_services/authentication/authentication.service';
+import {Router} from '@angular/router';
+import {UserService} from '../../../_services/user/user.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +15,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 export class RegisterComponent implements OnInit, AfterViewInit {
 
+  errorMsg: string;
+
   // Validators for email and password input fields
   registerForm = new FormGroup({
     emailFormControl: new FormControl('', [Validators.required, Validators.email]),
@@ -21,7 +27,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   // Password input field visibility variable
   hide = true;
 
-  constructor(private elementRef: ElementRef) {
+  constructor(
+    private elementRef: ElementRef,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private userService: UserService) {
+
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/details']);
+    }
   }
 
 
@@ -48,7 +62,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
   submitRegisterForm() {
-    console.log(this.registerForm.get('emailFormControl').value);
+    this.userService.register(this.registerForm.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate(['/login']);
+        },
+        error => {
+          this.errorMsg = error.error.message;
+        });
   }
 
 }

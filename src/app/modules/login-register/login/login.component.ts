@@ -14,7 +14,7 @@ import {first} from 'rxjs/operators';
 
 export class LoginComponent implements OnInit, AfterViewInit {
 
-  returnUrl: string;
+
   errorMsg: string;
 
   // Validators for email and password input fields
@@ -42,15 +42,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ) {
 
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/details']);
     }
   }
 
   ngOnInit(): void {
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-
+    
     this.particleJsCustomStyle = {
       position: 'fixed',
       width: '100%',
@@ -101,7 +98,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
+          console.log(data);
+          this.router.navigate(['/details']);
         },
         error => {
           console.log(error);

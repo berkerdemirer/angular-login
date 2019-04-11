@@ -1,0 +1,21 @@
+<mat-grid-list cols="1" rowHeight="100px" style="margin-top: 20vh">
+
+
+  <mat-grid-tile>
+    <h2 style="color: white; font-family: Verdana,serif">Logged In</h2>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <p style="color: white; font-family: Verdana,serif">User email : {{currentUser?.email}}</p>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <button
+      (click)="logout()"
+      mat-raised-button color="accent"
+      class="register-button">Log-out
+    </button>
+  </mat-grid-tile>
+
+
+</mat-grid-list>
