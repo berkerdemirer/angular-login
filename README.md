@@ -19,10 +19,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ## Functionalities
 
--Register
--Login
--Log-out
--Route protection
+-Register <br/>
+-Login <br/>
+-Log-out <br/>
+-Route protection <br/>
 -Validation with real Node.js backend using MongoDB
 
 ## Structure of the App
@@ -31,9 +31,9 @@ Application is developed with one module per component approach. All modules are
 
 ## REST Schema
 
-  apiUrl: 'https://agile-peak-56363.herokuapp.com'
-  /users/register -> Register new user
-  /users/authenticate -> Log-in and authenticate
+  apiUrl: 'https://agile-peak-56363.herokuapp.com'<br/>
+  /users/register -> Register new user <br/>
+  /users/authenticate -> Log-in and authenticate<br/>
   
 ## Session Management
 
