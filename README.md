@@ -31,7 +31,7 @@ Application is developed with one module per component approach. All modules are
 
 ## REST Schema & Backend
   
-  Server is deployed to heroku so at first request server needs to bootup, there may be little delays because of that. <br/>
+  <b>Server is deployed to heroku so at first request server needs to bootup, there may be little delays because of that. </b><br/>
   
   apiUrl: 'https://agile-peak-56363.herokuapp.com'<br/>
   /users/register -> Register new user <br/>
