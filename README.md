@@ -29,8 +29,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 Application is developed with one module per component approach. All modules are loaded lazily so that it improves the performance of the app. AuthGuard is implemented to the routes so that without valid JWT token, unauthorized user cannot access /details route of the app. For styling purposes angular material library is used.
 
-## REST Schema
-
+## REST Schema & Backend
+  
+  Server is deployed to heroku so at first request server needs to bootup, there may be little delays because of that. <br/>
+  
   apiUrl: 'https://agile-peak-56363.herokuapp.com'<br/>
   /users/register -> Register new user <br/>
   /users/authenticate -> Log-in and authenticate<br/>
