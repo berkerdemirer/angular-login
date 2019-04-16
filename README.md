@@ -2,26 +2,44 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
 
+## Installation
+
+If you don't have node.js on your system download the stable version from this link:
+https://nodejs.org/en/,
+
+Install angular-cli:
+
+`npm install -g @angular/cli`
+
+Clone the project and run `npm install` on terminal while you are in the project folder
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
-## Code scaffolding
+## Functionalities
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+-Register
+-Login
+-Log-out
+-Route protection
+-Validation with real Node.js backend using MongoDB
 
-## Build
+## Structure of the App
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Application is developed with one module per component approach. All modules are loaded lazily so that it improves the performance of the app. AuthGuard is implemented to the routes so that without valid JWT token, unauthorized user cannot access /details route of the app. For styling purposes angular material library is used.
 
-## Running unit tests
+## REST Schema
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  apiUrl: 'https://agile-peak-56363.herokuapp.com'
+  /users/register -> Register new user
+  /users/authenticate -> Log-in and authenticate
+  
+## Session Management
 
-## Running end-to-end tests
+After successfully authorize the user, jwt token is stored in local storage using key,value map. Unless it is deleted by the user with log-out function, users stays logged in
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+  
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
