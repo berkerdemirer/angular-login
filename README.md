@@ -37,6 +37,10 @@ Application is developed with one module per component approach. All modules are
   /users/register -> Register new user <br/>
   /users/authenticate -> Log-in and authenticate<br/>
   
+  Node.JS backend is implemented by applying the steps at: <br/>
+  http://jasonwatmore.com/post/2018/06/14/nodejs-mongodb-simple-api-for-authentication-registration-and-user-management
+
+  
 ## Session Management
 
 After successfully authorize the user, jwt token is stored in local storage using key,value map. Unless it is deleted by the user with log-out function, users stays logged in
